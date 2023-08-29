@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public bool muerte;
-
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        if (muerte)
+        if (other.gameObject.CompareTag("PlayerAtaque"))
         {
             Destroy(gameObject);
         }

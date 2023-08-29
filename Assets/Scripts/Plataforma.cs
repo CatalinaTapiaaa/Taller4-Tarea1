@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Plataforma : MonoBehaviour
-{   
+{
+    [Header("Componentes")]
+    public MovimientoPlayer movimientoPlayer;
+
     [Header("Stats")]
     public float rayDistancia;
     public float tiempoEspera;
@@ -36,6 +39,8 @@ public class Plataforma : MonoBehaviour
                             hit.transform.gameObject.GetComponent<EnergiaPlayer>().reponerEnergia = true;
                             controladorPuntaje.puntuacion += 1;
                             desactivarPlataforma = true;
+                            movimientoPlayer.sinEnergia = true;
+                            movimientoPlayer.impulsoPlataforma = true;
                         }
                         else
                         {
