@@ -8,7 +8,7 @@ public class TextoPuntaje : MonoBehaviour
     [Header("Puntaje")]
     public GameObject componenteScore;
     public ControladorPuntaje controladorPuntaje;
-    public TextMeshProUGUI puntuacionTexto; 
+    public TextMeshPro puntuacionTexto; 
 
     void Update()
     {

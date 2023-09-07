@@ -5,28 +5,40 @@ using UnityEngine;
 public class GeneradorEnemy : MonoBehaviour
 {
     public Transform[] pivotEnemy;
-    public GameObject enemy;
-    public int cantidadMin, cantidadMax;
+    public GameObject[] enemyOrTrampa;
+    public GameObject botones;
+    public bool reiniciar;
+    public float tiempoAni;
+    float tiempo;
+    int current;
 
     void Start()
     {
-        Spawn();
+        reiniciar = true;
     }
 
     void Update()
     {
-        
-    }
-
-    private void Spawn()
-    {
-        int cantidadEnemy = Random.Range(cantidadMin, cantidadMax);
-
-        for (int i = 0; i < cantidadEnemy; i++)
+        if (reiniciar)
         {
-            int pívotAleatorio = Random.Range(0, pivotEnemy.Length);
+            tiempo += Time.deltaTime;
+            botones.SetActive(false);
 
-            Instantiate(enemy, pivotEnemy[pívotAleatorio].position, Quaternion.identity);
+            if (tiempo >= tiempoAni)
+            {
+                int aleatorio = Random.Range(0, enemyOrTrampa.Length);
+                Instantiate(enemyOrTrampa[aleatorio], pivotEnemy[current].position, Quaternion.identity);
+                tiempo = 0;
+                current++;
+            }
+            if (current == 4)
+            {
+                reiniciar = false;
+            }
+        }
+        else
+        {
+            botones.SetActive(true);
         }
     }
 }
