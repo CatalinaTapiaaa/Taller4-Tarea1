@@ -6,6 +6,7 @@ public class Camara : MonoBehaviour
 {
     public Camera cam;
     public Player player;
+    public GameObject panelSatisfaccion;
     public PlataformaDe plataformaDe;
 
     [Header("Camara Lenta")]
@@ -21,29 +22,13 @@ public class Camara : MonoBehaviour
     private float shakeDuracion = 0.1f;
     private float shakeAmount = 0.2f;
 
-    private void Start()
-    {
-        Time.timeScale = 1;
-    }
-
     void Update()
     {
         if (plataformaDe.camaraLenta)
         {
             transform.position = Vector3.MoveTowards(transform.position, posicionZoom.position, velocidadPos);
             cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, acercar, velocidad);
-
-            if (transform.position == posicionZoom.position)
-            {
-                if (!plataformaDe.victory)
-                {
-                    Time.timeScale = 0.25f;
-                }
-                else
-                {
-                    Time.timeScale = 0;
-                }
-            }           
+            panelSatisfaccion.SetActive(true);
         }  
 
         if (player.muerte)

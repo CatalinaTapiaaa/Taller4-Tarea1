@@ -6,10 +6,11 @@ public class ControladorPuntaje : MonoBehaviour
 {
 	[Header("Score")]
 	public int puntuacion;
+	public int changeEnemy;
 	private static bool created;
 
-	public void Start()
-	{
+    public void Start()
+	{		
 		if (created)
 		{
 			Destroy(gameObject);
@@ -25,6 +26,10 @@ public class ControladorPuntaje : MonoBehaviour
 		if (PlayerPrefs.HasKey("Puntuacion"))
 		{
 			puntuacion = PlayerPrefs.GetInt("Puntuacion");
+		}
+		if (PlayerPrefs.HasKey("ChangeEnemy"))
+		{
+			changeEnemy = PlayerPrefs.GetInt("ChangeEnemy");
 		}
 	}
 }

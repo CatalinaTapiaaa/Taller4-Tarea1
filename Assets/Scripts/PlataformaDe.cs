@@ -9,14 +9,19 @@ public class PlataformaDe : MonoBehaviour
     public Player player;
     public Movimiento movimiento;
     [Space]
+    public ParticleSystem par;
     public GameObject panelSatisfaccionInstantanea;
     public GameObject x;
 
     [Header("Bools")]
     public bool camaraLenta;
-    public bool victory;
-    bool playerTrigger, playerCollision;
+    public bool playerTrigger, playerCollision;
     float timer;
+
+    private void Start()
+    {
+        par.Stop();
+    }
     void Update()
     {       
         GameObject[] enemigos = GameObject.FindGameObjectsWithTag("Enemy");
@@ -31,12 +36,12 @@ public class PlataformaDe : MonoBehaviour
                 if (playerTrigger)
                 {
                     camaraLenta = true;
+                    par.Play();
                 }
                 if (playerCollision)
                 {
                     movimiento.sinEnergia = true;
                     panelSatisfaccionInstantanea.SetActive(true);
-                    victory = true;
                 }
             }
         }       

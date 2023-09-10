@@ -7,6 +7,7 @@ public class Movimiento : MonoBehaviour
     [Header("Componentes")]
     public Rigidbody rb;
     public ParticleSystem particula;
+    public ParticleSystem particulaInicial;
     public Rotar rotar;
     public Rotar rotar2;
 
@@ -30,6 +31,7 @@ public class Movimiento : MonoBehaviour
     void Start()
     {
         particula.Stop();
+        particulaInicial.Stop();
         impulsoPlataforma = true;
     }
 
@@ -52,9 +54,12 @@ public class Movimiento : MonoBehaviour
                 rotar.encender = true;
                 rotar2.encender = true;
             }
+            particulaInicial.Stop();
         }
         if (sinEnergia)
         {
+            rotar.encender = false;
+            rotar2.encender = false;
             PropulsorDeEnd();
             PropulsorIzEnd();
         }
@@ -64,6 +69,7 @@ public class Movimiento : MonoBehaviour
 
     void Salto()
     {
+        particulaInicial.Play();
         rb.AddForce(Vector3.up * fuerzaImpulsoPlataforma, ForceMode.Impulse);
         impulsoPlataforma = false;
         tiempo = 0;
