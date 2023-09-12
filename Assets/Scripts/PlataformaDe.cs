@@ -6,22 +6,30 @@ public class PlataformaDe : MonoBehaviour
 {
     public float tiempo;
     [Header("Componentes")]
+    public float tiempoPanel;
+    public ParticleSystem par;
+    public ParticleSystem par1;
+
+    [Header("Componentes")]
     public Player player;
     public Movimiento movimiento;
     [Space]
-    public ParticleSystem par;
     public GameObject panelSatisfaccionInstantanea;
     public GameObject x;
 
     [Header("Bools")]
     public bool camaraLenta;
     public bool playerTrigger, playerCollision;
+    public bool victory;
     float timer;
+    float time1;
 
     private void Start()
     {
         par.Stop();
+        par1.Stop();
     }
+
     void Update()
     {       
         GameObject[] enemigos = GameObject.FindGameObjectsWithTag("Enemy");
@@ -36,12 +44,17 @@ public class PlataformaDe : MonoBehaviour
                 if (playerTrigger)
                 {
                     camaraLenta = true;
-                    par.Play();
                 }
                 if (playerCollision)
                 {
+                    victory = true;
+                    time1 += Time.deltaTime;
+                    player.noControl = true;
                     movimiento.sinEnergia = true;
-                    panelSatisfaccionInstantanea.SetActive(true);
+                    if (time1 >= tiempoPanel)
+                    {
+                        panelSatisfaccionInstantanea.SetActive(true);
+                    }
                 }
             }
         }       
@@ -52,29 +65,19 @@ public class PlataformaDe : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             playerTrigger = true;
-
+            par1.Play();
         }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            playerTrigger = false;
-        }
-    }
+    }   
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
             playerCollision = true;
+            if (victory)
+            {
+                par.Play();
+            }
         }
-    }
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            playerCollision = false;
-        }
-    }
+    }  
 }

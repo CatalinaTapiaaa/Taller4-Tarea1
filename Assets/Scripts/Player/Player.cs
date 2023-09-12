@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public bool muerte;
+    public bool muerte, noControl;
     [Space]
+    public GameObject controles;
+    public Meta meta;
     public Reiniciar reiniciar;
     public GameObject explocion;
     public Transform posicionExplocion;
@@ -14,9 +16,16 @@ public class Player : MonoBehaviour
     {
         if (muerte)
         {
+            noControl = true;
             Instantiate(explocion, posicionExplocion.position, Quaternion.identity);
             Destroy(gameObject);
             reiniciar.reiniciar = true;
+        }
+        if (noControl)
+        {
+            controles.SetActive(false);
+            meta.rellenarIz = false;
+            meta.rellenarDe = false;
         }
     }
 

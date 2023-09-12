@@ -18,6 +18,7 @@ public class Meta : MonoBehaviour
     public bool playerTrigger, playerCollision;
     float cargaMax = 100;
     public bool rellenarIz, rellenarDe;
+    public bool activar;
     //llenar toda la barra con energia, el jugador la llena volando la nave en el trigger
 
     private void Start()
@@ -27,13 +28,16 @@ public class Meta : MonoBehaviour
 
     void Update()
     {
-        if (rellenarIz)
+        if (activar)
         {
-            tiempo += rellenarBarra * Time.deltaTime;
-        }
-        if (rellenarDe)
-        {
-            tiempo += rellenarBarra * Time.deltaTime;
+            if (rellenarIz)
+            {
+                tiempo += rellenarBarra * Time.deltaTime;
+            }
+            if (rellenarDe)
+            {
+                tiempo += rellenarBarra * Time.deltaTime;
+            }
         }
 
         if (playerTrigger)

@@ -6,6 +6,7 @@ public class Camara : MonoBehaviour
 {
     public Camera cam;
     public Player player;
+    public Meta meta;
     public GameObject panelSatisfaccion;
     public PlataformaDe plataformaDe;
 
@@ -26,10 +27,11 @@ public class Camara : MonoBehaviour
     {
         if (plataformaDe.camaraLenta)
         {
+            meta.activar = true;
             transform.position = Vector3.MoveTowards(transform.position, posicionZoom.position, velocidadPos);
             cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, acercar, velocidad);
             panelSatisfaccion.SetActive(true);
-        }  
+        }
 
         if (player.muerte)
         {

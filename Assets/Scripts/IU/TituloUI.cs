@@ -6,21 +6,59 @@ using UnityEngine.SceneManagement;
 public class TituloUI : MonoBehaviour
 {
     public Animator ani;
+    public GameObject panelReiniciar;
 
+    [Header("Gameplay o Tutorial")]
+    public GameObject componente;
+    public GameplayOrTutorial controlador;
+    [Space]
+    public GameObject botonGameplay;
+    public GameObject botonTutorial;
+
+    [Header("Gameplay o Tutorial")]
+    public GameObject componentePuntaje;
+    public ControladorPuntaje controladorPuntaje;
+
+    private void Update()
+    {
+        componente = GameObject.Find("GAMEPLAY OR TURORIAL");
+        controlador = componente.GetComponent<GameplayOrTutorial>();
+
+        componentePuntaje = GameObject.Find("CONTROLADOR PUNTAJE");
+        controladorPuntaje = componentePuntaje.GetComponent<ControladorPuntaje>();
+
+        if (controlador.num == 0)
+        {
+            botonGameplay.SetActive(false);
+            botonTutorial.SetActive(true);
+        }
+        else if (controlador.num > 0)
+        {
+            botonGameplay.SetActive(true);
+            botonTutorial.SetActive(false);
+        }
+    }
     public void Gameplay()
     {
         Time.timeScale = 1;
-        AnimacionAbrirGameplay();
+        StartCoroutine(AnimacionAbrirGameplay());
+        botonGameplay.SetActive(false);
     }
-    public void Tutorial()
+    public void Turorial()
     {
         Time.timeScale = 1;
-        AnimacionAbrirTutorial();
+        controlador.num += 1;
+        StartCoroutine(AnimacionAbrirTutorial());
+        botonTutorial.SetActive(false);
+    }
+    public void Reiniciar()
+    {
+        panelReiniciar.SetActive(true);
     }
     public void Creditos()
     {
         Time.timeScale = 1;
-        AnimacionAbrirCreditos();
+        StartCoroutine(AnimacionAbrirCreditos());
     }
 
     private IEnumerator AnimacionAbrirGameplay()
