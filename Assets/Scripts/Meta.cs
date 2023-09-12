@@ -11,6 +11,7 @@ public class Meta : MonoBehaviour
     public float rellenarBarra;
     public int aleatorio;
     [Space]
+    public float tiempoDespues;
     public GameObject panelEnemy;
     public GameObject panelTrampa;
 
@@ -20,6 +21,7 @@ public class Meta : MonoBehaviour
     public bool rellenarIz, rellenarDe;
     public bool activar;
     //llenar toda la barra con energia, el jugador la llena volando la nave en el trigger
+    float t;
 
     private void Start()
     {
@@ -46,21 +48,29 @@ public class Meta : MonoBehaviour
             {
                 if (playerCollision)
                 {
-                    if (aleatorio == 1)
+                    t += Time.deltaTime;
+                    if (t >= tiempoDespues)
                     {
-                        panelEnemy.SetActive(true);                    
-                    }
-                    if (aleatorio == 2)
-                    {
-                        panelTrampa.SetActive(true);                  
-                    }
+                        if (aleatorio == 1)
+                        {
+                            panelEnemy.SetActive(true);
+                        }
+                        if (aleatorio == 2)
+                        {
+                            panelTrampa.SetActive(true);
+                        }
+                    }             
                 }
             }
             else
             {
                 if (playerCollision)
                 {
-                    reiniciar.reiniciar = true;
+                    t += Time.deltaTime;
+                    if (t >= tiempoDespues)
+                    {
+                        reiniciar.reiniciar = true;
+                    }
                 }
             }
         }

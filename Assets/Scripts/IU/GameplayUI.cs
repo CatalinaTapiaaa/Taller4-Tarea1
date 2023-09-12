@@ -34,8 +34,9 @@ public class GameplayUI : MonoBehaviour
     }
     public void Menu()
     {
-        SceneManager.LoadScene(0);
-    }  
+        reiniciar.volverTitulo = true;
+        Time.timeScale = 1;
+    }
 
     public void BotonEnemy()
     {
@@ -50,5 +51,5 @@ public class GameplayUI : MonoBehaviour
         controlPuntaje.changeEnemy = 2;
         controlPuntaje.puntuacion += 1;
         botonTrampa.SetActive(false);
-    }
+    }   
 }

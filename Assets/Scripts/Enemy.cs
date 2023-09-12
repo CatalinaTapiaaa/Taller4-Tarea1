@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] private AudioClip audioMuerte;
     public Animator ani;
 
     void Start()
@@ -22,6 +23,7 @@ public class Enemy : MonoBehaviour
     {
         if (other.gameObject.CompareTag("PlayerAtaque"))
         {
+            ControlSonidos.Instance.EjecutarSonido(audioMuerte);
             Destroy(gameObject);
         }
     }

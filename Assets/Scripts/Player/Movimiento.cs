@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class Movimiento : MonoBehaviour
 {
+    [SerializeField] private AudioSource audioPropulsor;
+    [SerializeField] private AudioSource audioPropulsor2;
     [Header("Componentes")]
     public Rigidbody rb;
     public ParticleSystem particula;
+    public ParticleSystem particula2;
     public ParticleSystem particulaInicial;
     public Rotar rotar;
     public Rotar rotar2;
@@ -31,6 +34,9 @@ public class Movimiento : MonoBehaviour
     void Start()
     {
         particula.Stop();
+        particula2.Stop();
+        audioPropulsor2.Stop();
+        audioPropulsor.Stop();
         particulaInicial.Stop();
         impulsoPlataforma = true;
     }
@@ -43,18 +49,21 @@ public class Movimiento : MonoBehaviour
             {
                 transform.Rotate(0, 0, fuerzaRotacionZ * Time.deltaTime);
                 rb.AddForce(direccionIz * velocidadMovimiento * Time.deltaTime);
-            }
+            }          
             if (moverseIz)
             {
                 transform.Rotate(0, 0, -fuerzaRotacionZ * Time.deltaTime);
                 rb.AddForce(direccionDe * velocidadMovimiento * Time.deltaTime);
-            }
+            }      
+            
             if (!impulsoPlataforma)
             {
                 rotar.encender = true;
                 rotar2.encender = true;
             }
+            audioPropulsor2.Stop();
             particulaInicial.Stop();
+            particula2.Stop();
         }
         if (sinEnergia)
         {
@@ -69,7 +78,9 @@ public class Movimiento : MonoBehaviour
 
     void Salto()
     {
+        audioPropulsor2.Play();
         particulaInicial.Play();
+        particula2.Play();
         rb.AddForce(Vector3.up * fuerzaImpulsoPlataforma, ForceMode.Impulse);
         impulsoPlataforma = false;
         tiempo = 0;
@@ -81,6 +92,7 @@ public class Movimiento : MonoBehaviour
     {
         moverseDe = true;
         particula.Play();
+        audioPropulsor.Play();
 
         if (impulsoPlataforma)
         {
@@ -92,6 +104,7 @@ public class Movimiento : MonoBehaviour
     {
         moverseIz = true;
         particula.Play();
+        audioPropulsor.Play();
 
         if (impulsoPlataforma)
         {
@@ -102,12 +115,14 @@ public class Movimiento : MonoBehaviour
     //Botones Fin
     public void PropulsorDeEnd()
     {
-        moverseDe = false;
+        audioPropulsor.Stop();
         particula.Stop();
+        moverseDe = false;
     }
     public void PropulsorIzEnd()
     {
-        moverseIz = false;
+        audioPropulsor.Stop();
         particula.Stop();
+        moverseIz = false;
     }
 }

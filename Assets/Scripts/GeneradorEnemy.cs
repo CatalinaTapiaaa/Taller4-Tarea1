@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GeneradorEnemy : MonoBehaviour
 {
+    [SerializeField] private AudioClip audioAparicion;
     public GameObject enemy;
     public GameObject trampa;
     [Space]
@@ -50,6 +51,7 @@ public class GeneradorEnemy : MonoBehaviour
 
                 if (tiempo >= tiempoAni)
                 {
+                    ControlSonidos.Instance.EjecutarSonido(audioAparicion);
                     int aleatorio = Random.Range(0, enemyOrTrampa.Count);
                     Instantiate(enemyOrTrampa[aleatorio], pivotEnemy[current].position, Quaternion.identity);
                     tiempo = 0;
@@ -58,12 +60,10 @@ public class GeneradorEnemy : MonoBehaviour
                 if (current == 4)
                 {
                     reiniciar = false;
+                    botones.SetActive(true);
+
                 }
             }            
-        }
-        else
-        {
-            botones.SetActive(true);
         }
     }
 }

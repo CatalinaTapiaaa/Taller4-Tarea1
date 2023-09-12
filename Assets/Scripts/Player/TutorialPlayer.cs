@@ -5,48 +5,121 @@ using UnityEngine.UI;
 
 public class TutorialPlayer : MonoBehaviour
 {
-    public Image barraDe;
-    public Image barraIz;
-
+    public TutorialUI tutorialUI;
+    public Image barra;
+    public ParticleSystem particula;
+    [Space]
     public float rellenarBarra;
     public float fuerzaRotacionZ;
     public bool moverseDe;
     public bool moverseIz;
-
     float cargaMax = 100;
-    float tiempo1, tiempo2;
+
+    public float tiempo;
+
+    [Header("Botones")]
+    public GameObject de;
+    public GameObject iz;
+
+    bool uno, dos, tres;
+    void Start()
+    {
+        tiempo = cargaMax;
+        uno = true;
+        particula.Stop();
+    }
 
     private void Update()
     {
-        if (moverseDe)
+        if (dos)
         {
-            transform.Rotate(0, 0, fuerzaRotacionZ * Time.deltaTime);
-            tiempo1 += rellenarBarra * Time.deltaTime;
+            tiempo += 100 * Time.deltaTime;
+            de.SetActive(false);
+
+            if (tiempo >= 100)
+            {
+                iz.SetActive(true);
+                dos = false;
+            }
         }
-        if (moverseIz)
+        if (tres)
         {
-            tiempo2 += rellenarBarra * Time.deltaTime;
-            transform.Rotate(0, 0, -fuerzaRotacionZ * Time.deltaTime);
+            iz.SetActive(false);
+            tiempo += 100 * Time.deltaTime;
+            if (tiempo >= 100)
+            {
+                iz.SetActive(true);
+                de.SetActive(true);
+                tres = false;
+            }
+        }   
+
+
+        if (uno)
+        {
+            if (moverseDe)
+            {
+                tiempo -= rellenarBarra * Time.deltaTime;
+                transform.Rotate(0, 0, fuerzaRotacionZ * Time.deltaTime);
+
+                if (tiempo <= 0)
+                {
+                    moverseDe = false;
+                    dos = true;
+                }
+            }
+
+            if (moverseIz)
+            {
+                tiempo -= rellenarBarra * Time.deltaTime;
+                transform.Rotate(0, 0, -fuerzaRotacionZ * Time.deltaTime);
+
+                if (tiempo <= 0)
+                {
+                    moverseIz = false;
+                    uno = false;
+                    tres = true;
+                }
+            }
+        }
+        else
+        {
+            if (moverseIz && moverseDe)
+            {
+                tiempo -= rellenarBarra * Time.deltaTime;
+
+                if (tiempo <= 0)
+                {
+                    iz.SetActive(false);
+                    de.SetActive(false);
+                    moverseIz = false;
+                    moverseDe = false;
+                    tutorialUI.pasarGameplay = true;
+                }
+            }
         }
 
-        barraDe.fillAmount = tiempo1 / cargaMax;
-        barraIz.fillAmount = tiempo2 / cargaMax;
+        barra.fillAmount = tiempo / cargaMax;
     }
     public void PropulsorDe()
     {
-
+        moverseDe = true;
+        particula.Play();
     }
     public void PropulsorIz()
     {
-
+        moverseIz = true;
+        particula.Play();
     }
 
     public void PropulsorDeEnd()
     {
-
+        moverseDe = false;
+        particula.Stop();
     }
     public void PropulsorIzEnd()
     {
-
+        moverseIz = false;
+        particula.Stop();
     }
 }

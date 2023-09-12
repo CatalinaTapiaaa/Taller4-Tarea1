@@ -249,6 +249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 065643474d46a474692ea2c9c735c7a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioMuerte: {fileID: 8300000, guid: 988657bb8352c284da4fce654a9b09e6, type: 3}
   ani: {fileID: 8357343462757533121}
 --- !u!54 &-4851247097225520069
 Rigidbody:

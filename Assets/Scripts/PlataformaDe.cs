@@ -14,15 +14,14 @@ public class PlataformaDe : MonoBehaviour
     public Player player;
     public Movimiento movimiento;
     [Space]
-    public GameObject panelSatisfaccionInstantanea;
     public GameObject x;
 
     [Header("Bools")]
     public bool camaraLenta;
     public bool playerTrigger, playerCollision;
     public bool victory;
+
     float timer;
-    float time1;
 
     private void Start()
     {
@@ -44,20 +43,15 @@ public class PlataformaDe : MonoBehaviour
                 if (playerTrigger)
                 {
                     camaraLenta = true;
+                    victory = true;
                 }
                 if (playerCollision)
                 {
-                    victory = true;
-                    time1 += Time.deltaTime;
                     player.noControl = true;
-                    movimiento.sinEnergia = true;
-                    if (time1 >= tiempoPanel)
-                    {
-                        panelSatisfaccionInstantanea.SetActive(true);
-                    }
+                    movimiento.sinEnergia = true;          
                 }
             }
-        }       
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -65,7 +59,10 @@ public class PlataformaDe : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             playerTrigger = true;
-            par1.Play();
+            if (victory)
+            {
+                par1.Play();
+            }
         }
     }   
 
@@ -74,10 +71,7 @@ public class PlataformaDe : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             playerCollision = true;
-            if (victory)
-            {
-                par.Play();
-            }
+            par.Play();
         }
     }  
 }

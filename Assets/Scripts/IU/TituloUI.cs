@@ -19,6 +19,11 @@ public class TituloUI : MonoBehaviour
     public GameObject componentePuntaje;
     public ControladorPuntaje controladorPuntaje;
 
+    private void Start()
+    {
+        StartCoroutine(AnimacionCerrar());
+    }
+
     private void Update()
     {
         componente = GameObject.Find("GAMEPLAY OR TURORIAL");
@@ -55,6 +60,18 @@ public class TituloUI : MonoBehaviour
     {
         panelReiniciar.SetActive(true);
     }
+    public void Si()
+    {
+        panelReiniciar.SetActive(false);
+        controlador.num = 0;
+        controladorPuntaje.puntuacion = 0;
+        controladorPuntaje.changeEnemy = 0;
+    }
+    public void No()
+    {
+        panelReiniciar.SetActive(false);
+    }
+
     public void Creditos()
     {
         Time.timeScale = 1;
@@ -78,5 +95,12 @@ public class TituloUI : MonoBehaviour
         ani.SetBool("Abrir", true);
         yield return new WaitForSeconds(1);
         SceneManager.LoadScene(3);
+    }
+
+    private IEnumerator AnimacionCerrar()
+    {
+        ani.SetBool("Cerrar", true);
+        yield return new WaitForSeconds(1);
+        ani.SetBool("Cerrar", false);
     }
 }

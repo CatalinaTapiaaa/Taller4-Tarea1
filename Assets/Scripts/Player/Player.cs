@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] private AudioClip audioExplosion;
+    [Space]
     public bool muerte, noControl;
     [Space]
     public GameObject controles;
@@ -16,6 +18,7 @@ public class Player : MonoBehaviour
     {
         if (muerte)
         {
+            ControlSonidos.Instance.EjecutarSonido(audioExplosion);
             noControl = true;
             Instantiate(explocion, posicionExplocion.position, Quaternion.identity);
             Destroy(gameObject);

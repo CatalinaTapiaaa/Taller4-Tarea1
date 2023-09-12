@@ -8,6 +8,7 @@ public class Reiniciar : MonoBehaviour
 	public Animator ani;
 	[Space]
 	public bool reiniciar;
+	public bool volverTitulo;
 	public float tiempo;
 	float time;
 
@@ -27,6 +28,10 @@ public class Reiniciar : MonoBehaviour
 				StartCoroutine(AnimacionAbrir());
 			}
 		}
+		if (volverTitulo)
+        {
+			StartCoroutine(AnimacionAbrirTitulo());
+		}
 	}
 
     private IEnumerator AnimacionAbrir()
@@ -40,5 +45,11 @@ public class Reiniciar : MonoBehaviour
 		ani.SetBool("Cerrar", true);
 		yield return new WaitForSeconds(1);
 		ani.SetBool("Cerrar", false);
+	}
+	private IEnumerator AnimacionAbrirTitulo()
+	{
+		ani.SetBool("Abrir", true);
+		yield return new WaitForSeconds(1);
+		SceneManager.LoadScene(0);
 	}
 }
