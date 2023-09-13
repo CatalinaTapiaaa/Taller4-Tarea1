@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class TutorialPlayer : MonoBehaviour
 {
+    [SerializeField] private AudioSource audioPropulsor;
     public TutorialUI tutorialUI;
     public Image barra;
     public ParticleSystem particula;
@@ -27,6 +28,7 @@ public class TutorialPlayer : MonoBehaviour
         tiempo = cargaMax;
         uno = true;
         particula.Stop();
+        audioPropulsor.Stop();
     }
 
     private void Update()
@@ -105,21 +107,25 @@ public class TutorialPlayer : MonoBehaviour
     {
         moverseDe = true;
         particula.Play();
+        audioPropulsor.Play();
     }
     public void PropulsorIz()
     {
         moverseIz = true;
         particula.Play();
+        audioPropulsor.Play();
     }
 
     public void PropulsorDeEnd()
     {
         moverseDe = false;
         particula.Stop();
+        audioPropulsor.Stop();
     }
     public void PropulsorIzEnd()
     {
         moverseIz = false;
         particula.Stop();
+        audioPropulsor.Stop();
     }
 }

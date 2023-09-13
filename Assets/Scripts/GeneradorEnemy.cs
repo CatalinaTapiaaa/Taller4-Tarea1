@@ -59,9 +59,12 @@ public class GeneradorEnemy : MonoBehaviour
                 }
                 if (current == 4)
                 {
+                    current++;
+                }
+                if (current == 5)
+                {
                     reiniciar = false;
                     botones.SetActive(true);
-
                 }
             }            
         }

@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour
     private IEnumerator Animacion()
     {
         ani.SetBool("Move", true);
-        yield return new WaitForSeconds(0.40f);
+        yield return new WaitForSeconds(1);
         ani.SetBool("Move", false);
     }
 
@@ -24,7 +24,13 @@ public class Enemy : MonoBehaviour
         if (other.gameObject.CompareTag("PlayerAtaque"))
         {
             ControlSonidos.Instance.EjecutarSonido(audioMuerte);
-            Destroy(gameObject);
+            StartCoroutine(Muerte());
         }
+    }
+    private IEnumerator Muerte()
+    {
+        ani.SetBool("Muerte", true);
+        yield return new WaitForSeconds(0.30f);
+        Destroy(gameObject);
     }
 }

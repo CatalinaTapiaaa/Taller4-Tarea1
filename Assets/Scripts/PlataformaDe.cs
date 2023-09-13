@@ -15,6 +15,7 @@ public class PlataformaDe : MonoBehaviour
     public Movimiento movimiento;
     [Space]
     public GameObject x;
+    public Animator aniX;
 
     [Header("Bools")]
     public bool camaraLenta;
@@ -37,7 +38,7 @@ public class PlataformaDe : MonoBehaviour
         {
             if (enemigos.Length == 0)
             {
-                x.SetActive(false);
+                aniX.SetBool("Muerte", true);
                 gameObject.tag = "Plataforma";
 
                 if (playerTrigger)
@@ -48,6 +49,7 @@ public class PlataformaDe : MonoBehaviour
                 if (playerCollision)
                 {
                     player.noControl = true;
+                    movimiento.kinematic = true;
                     movimiento.sinEnergia = true;          
                 }
             }

@@ -14,7 +14,7 @@ public class Trampa : MonoBehaviour
     private IEnumerator Animacion()
     {
         ani.SetBool("Move", true);
-        yield return new WaitForSeconds(0.40f);
+        yield return new WaitForSeconds(1);
         ani.SetBool("Move", false);
     }
 }

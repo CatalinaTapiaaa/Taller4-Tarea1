@@ -11,6 +11,7 @@ public class Movimiento : MonoBehaviour
     public ParticleSystem particula;
     public ParticleSystem particula2;
     public ParticleSystem particulaInicial;
+    public Energia energy;
     public Rotar rotar;
     public Rotar rotar2;
 
@@ -30,7 +31,7 @@ public class Movimiento : MonoBehaviour
     public bool moverseIz;
     public bool sinEnergia;
     public bool impulsoPlataforma;
-
+    public bool kinematic;
     void Start()
     {
         particula.Stop();
@@ -71,6 +72,10 @@ public class Movimiento : MonoBehaviour
             rotar2.encender = false;
             PropulsorDeEnd();
             PropulsorIzEnd();
+        }
+        if (kinematic)
+		{
+            rb.isKinematic = true;
         }
 
         tiempo += Time.deltaTime;
