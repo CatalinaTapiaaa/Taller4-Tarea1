@@ -4,11 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Plataforma
-  - Enemy
   - Suelo
-  - PlayerAtaque
-  - PlayerDebilidad
   layers:
   - Default
   - TransparentFX
@@ -45,22 +41,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Player
-    uniqueID: 189542605
-    locked: 0
-  - name: UI
-    uniqueID: 375130885
-    locked: 0
-  - name: Pausa
-    uniqueID: 2958999431
-    locked: 0
-  - name: Menu Pausa
-    uniqueID: 3498487367
-    locked: 0
-  - name: Menu Victory
-    uniqueID: 604866069
-    locked: 0
-  - name: Transicion
-    uniqueID: 2646313321
     locked: 0
